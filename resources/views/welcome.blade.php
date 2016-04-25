@@ -1,45 +1,20 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Laravel</title>
+        <title>Laravel Boilerplate</title>
 
+        <link href="{{ elixir('css/app.css') }}" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
-        <style>
-            html, body {
-                height: 100%;
-            }
+        <script type="text/javascript" src="/js/vendor.js" defer></script>
+        <script type="text/javascript" src="{{ elixir('js/templates.js') }}" defer></script>
+        <script type="text/javascript" src="{{ elixir('js/app.js') }}" defer></script>
 
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
-            }
-        </style>
+        <base href="/" />
     </head>
-    <body>
+    <body ng-app="Application">
         <div class="container">
-            <div class="content">
-                <div class="title">Laravel 5</div>
-            </div>
+            <ui-view></ui-view>
         </div>
     </body>
 </html>
