@@ -3,7 +3,9 @@
     <head>
         <title>Laravel Boilerplate</title>
 
-        <link href="{{ elixir('css/app.css') }}" rel="stylesheet" type="text/css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link href="{{ elixir('css/app.css') }}" rel="stylesheet" type="text/css" media="screen">
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
         <script type="text/javascript" src="/js/vendor.js" defer></script>
@@ -13,8 +15,6 @@
         <base href="/" />
     </head>
     <body ng-app="Application">
-        <div class="container">
-            <ui-view></ui-view>
-        </div>
+        <ui-view></ui-view>
     </body>
 </html>

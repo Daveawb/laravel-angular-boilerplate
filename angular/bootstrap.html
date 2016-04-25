@@ -1,9 +1,13 @@
-<div class="container">
-    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-    	Sidebar
-    </div>
+<header ui-view="navbar"></header>
 
-    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-    	Content
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <div ui-view="sidebar"></div>
+        </div>
+
+        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+            <div ui-view="content"></div>
+        </div>
     </div>
 </div>

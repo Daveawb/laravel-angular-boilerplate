@@ -1,8 +1,13 @@
+require('./components/sidebar/sidebar.js');
+require('./components/navbar/navbar.js');
+
 angular.module('Application', [
     'Templates',
     'ui.bootstrap',
     'ui.router',
-    'ngAnimate'
+    'ngAnimate',
+    'Application.SideBar',
+    'Application.NavBar'
 ])
 
     .config(['$locationProvider', '$urlRouterProvider', function ($locationProvider, $urlRouterProvider) {
@@ -11,8 +16,25 @@ angular.module('Application', [
     }])
 
     .config(['$stateProvider', function($stateProvider) {
-        $stateProvider.state('root', {
-            url: '/',
-            templateUrl: 'templates/bootstrap.html'
-        });
+        $stateProvider.state('base', {
+            abstract: true,
+            views: {
+                '@' : {
+                    templateUrl: 'templates/bootstrap.html'
+                }
+            }
+        })
+            .state('base.root', {
+                url : '/',
+                views: {
+                    'navbar@base' : {
+                        templateUrl: 'templates/components/navbar/navbar.html',
+                        controller: 'NavbarController as navbar'
+                    },
+                    'sidebar@base' : {
+                        templateUrl: 'templates/components/sidebar/sidebar.html',
+                        controller: 'SideBarController as sidebar'
+                    }
+                }
+            });
     }]);
