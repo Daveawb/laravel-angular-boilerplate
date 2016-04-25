@@ -11,6 +11,15 @@ var elixir = require('laravel-elixir');
  |
  */
 
-elixir(function(mix) {
-    mix.sass('app.scss');
+var scripts = [
+    'angular/angular.min.js',
+    'angular-animate/angular-animate.min.js',
+    'angular-resource/angular-resource.min.js'
+];
+
+elixir(function(mixr) {
+    mixr.sass('app.scss')
+        .scripts(scripts, 'public/js/vendor.js', 'node_modules')
+        .browserify('bootstrap.js', 'public/js/app.js', 'angular')
+        .version('public/js/app.js');
 });
