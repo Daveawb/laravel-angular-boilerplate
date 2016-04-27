@@ -7,6 +7,17 @@ use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class PasswordController extends Controller
 {
+
+    /**
+     * @var string
+     */
+    protected $linkRequestView = "marketing.auth.passwords.email";
+
+    /**
+     * @var string
+     */
+    protected $resetView = "marketing.auth.passwords.reset";
+
     /*
     |--------------------------------------------------------------------------
     | Password Reset Controller
@@ -19,6 +30,15 @@ class PasswordController extends Controller
     */
 
     use ResetsPasswords;
+
+    /**
+     * @param $response
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function getSendResetLinkEmailSuccessResponse($response)
+    {
+        return view('marketing.auth.passwords.ready')->with('status', trans($response));
+    }
 
     /**
      * Create a new password controller instance.

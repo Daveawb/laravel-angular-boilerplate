@@ -1,5 +1,8 @@
 <?php
 
+/** @var \Illuminate\Routing\Router $router */
+$router = app('router');
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -11,6 +14,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Password Reset Routes...
+
+$router->group(['middleware' => ['guest']], function($router) {
+    $router->get('/', 'Marketing\WelcomeController@index');
 });
+
+$router->group(['middleware' => ['web', 'auth']], function($router) {
+    $router->get('/', 'User\WelcomeController@index');
+});
+
+$router->auth();
+

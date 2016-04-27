@@ -24,19 +24,31 @@ var scripts = [
 elixir(function(mixr) {
     mixr.sass('app.scss')
         .scripts(scripts, 'public/js/vendor.js', 'node_modules')
-        .browserify('bootstrap.js', 'public/js/app.js', 'angular')
+        .browserify('bootstrap.js', 'public/js/admin/app.js', 'angular/admin/')
+        .browserify('bootstrap.js', 'public/js/user/app.js', 'angular/user/')
         .templates({
                 module : 'Templates',
                 root   : 'templates',
                 standalone : true
             },
-            'angular/**/*.html',
-            'public/js',
+            'angular/admin/**/*.html',
+            'public/js/admin',
+            'templates'
+        )
+        .templates({
+                module : 'Templates',
+                root   : 'templates',
+                standalone : true
+            },
+            'angular/user/**/*.html',
+            'public/js/user',
             'templates'
         )
         .version([
-            'public/js/app.js',
-            'public/css/app.css',
-            'public/js/templates.js'
+            'public/js/admin/app.js',
+            'public/js/admin/templates.js',
+            'public/js/user/app.js',
+            'public/js/user/templates.js',
+            'public/css/app.css'
         ]);
 });

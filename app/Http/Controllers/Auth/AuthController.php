@@ -10,6 +10,21 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
 {
+    /**
+     * @var string
+     */
+    protected $loginView = "marketing.auth.login";
+
+    /**
+     * @var string
+     */
+    protected $redirectAfterLogout = "/";
+
+    /**
+     * @var string
+     */
+    protected $registerView = "marketing.auth.register";
+
     /*
     |--------------------------------------------------------------------------
     | Registration & Login Controller

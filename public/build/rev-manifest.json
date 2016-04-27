@@ -1,5 +1,7 @@
 {
-  "css/app.css": "css/app-53ea3b8518.css",
-  "js/app.js": "js/app-ab736536a7.js",
-  "js/templates.js": "js/templates-115187233f.js"
+  "css/app.css": "css/app-e78a0a3318.css",
+  "js/admin/app.js": "js/admin/app-ab736536a7.js",
+  "js/admin/templates.js": "js/admin/templates-115187233f.js",
+  "js/user/app.js": "js/user/app-e1cf93d91d.js",
+  "js/user/templates.js": "js/user/templates-59c5496339.js"
 }

@@ -1,0 +1,13 @@
+<ul class="navbar-default sidebar-nav">
+    <li class="sidebar-search">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search">
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+    </li>
+    <li ng-repeat="link in sidebar.links" ui-sref-active="active">
+        <a ui-sref="{{ link.sref }}" href="#"><i class="fa {{ link.icon }}"></i>&nbsp;{{ link.title }}</a>
+    </li>
+</ul>

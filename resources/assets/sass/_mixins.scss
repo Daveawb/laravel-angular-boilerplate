@@ -1,0 +1,23 @@
+@mixin create-panels($list: ("blue" $brand-primary) ("green" $brand-success) ("yellow" $brand-warning) ("red", $brand-danger)) {
+  @each $panel in $list {
+    @include context-panel(nth($panel, 1), nth($panel, 2));
+  }
+}
+
+@mixin context-panel($name, $colour) {
+  .panel-#{$name} {
+    box-shadow:1px 1px 5px 1px lighten($colour, 30%);
+    border-color: $colour;
+    .panel-heading {
+      border-color: $colour;
+      color: white;
+      background-color: $colour;
+    }
+    a {
+      color: $colour;
+      &:hover {
+        color: darken($colour, 15%);
+      }
+    }
+  }
+}
