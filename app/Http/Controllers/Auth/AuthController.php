@@ -3,28 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
 {
-    /**
-     * @var string
-     */
-    protected $loginView = "marketing.auth.login";
-
-    /**
-     * @var string
-     */
-    protected $redirectAfterLogout = "/";
-
-    /**
-     * @var string
-     */
-    protected $registerView = "marketing.auth.register";
-
     /*
     |--------------------------------------------------------------------------
     | Registration & Login Controller
@@ -43,12 +28,31 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/admin';
+
+    /**
+     * Where to redirect users after logging out.
+     *
+     * @var string
+     */
+    protected $redirectAfterLogout = "/";
+
+    /**
+     * The view to show for login.
+     *
+     * @var string
+     */
+    protected $loginView = "marketing.auth.login";
+
+    /**
+     * The view to show for registration.
+     *
+     * @var string
+     */
+    protected $registerView = "marketing.auth.register";
 
     /**
      * Create a new authentication controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {

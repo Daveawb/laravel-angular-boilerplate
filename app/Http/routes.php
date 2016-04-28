@@ -14,18 +14,17 @@ $router = app('router');
 |
 */
 
-// Password Reset Routes...
-
-$router->group(['middleware' => ['guest']], function($router) {
-    $router->get('/', 'Marketing\WelcomeController@index');
-});
-
-$router->group(['middleware' => ['auth']], function($router) {
+$router->group(['prefix' => 'admin', 'middleware' => 'auth'], function($router) {
     $router->get('/', 'User\WelcomeController@index');
 });
 
 $router->group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => ['api']], function($router) {
     $router->resource('user', 'UserController', ['except' => ['create', 'edit']]);
 });
+
+$router->group(['middleware' => []], function($router) {
+    $router->get('/', 'Marketing\WelcomeController@index');
+});
+
 
 $router->auth();

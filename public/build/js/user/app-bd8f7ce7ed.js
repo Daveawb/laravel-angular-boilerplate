@@ -29,7 +29,7 @@ Factory.$inject = [];
 module.exports = Factory;
 
 },{}],2:[function(require,module,exports){
-'use strict';
+"use strict";
 
 require('./components/sidebar');
 require('./components/navbar');
@@ -38,7 +38,7 @@ require('./modules/users');
 
 angular.module('User', ['Templates', 'ui.bootstrap', 'ui.router', 'ngAnimate', 'Component.SideBar', 'Component.NavBar', 'Module.Dashboard', 'Module.Users']).factory('RandString', require('../common/randomstring')).config(['$locationProvider', '$urlRouterProvider', function ($locationProvider, $urlRouterProvider) {
     $locationProvider.html5Mode(true);
-    $urlRouterProvider.otherwise("/");
+    $urlRouterProvider.otherwise("/admin");
 }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider.state('base', {
         abstract: true,
@@ -88,10 +88,6 @@ var Controller = function Controller() {
         sref: "base.dashboard",
         title: "Dashboard",
         icon: "fa-dashboard"
-    }, {
-        sref: "base.users",
-        title: "Users",
-        icon: "fa-users"
     }];
 };
 
@@ -107,11 +103,11 @@ angular.module('Component.SideBar', []).controller('SideBarController', require(
 },{"./controller":5}],7:[function(require,module,exports){
 arguments[4][3][0].apply(exports,arguments)
 },{"dup":3}],8:[function(require,module,exports){
-'use strict';
+"use strict";
 
 angular.module('Module.Dashboard', []).controller('DashboardController', require('./controller')).config(['$stateProvider', function ($stateProvider) {
     $stateProvider.state('base.dashboard', {
-        url: '/',
+        url: '/admin',
         views: {
             'content@': {
                 templateUrl: 'templates/modules/dashboard/dashboard.html',
@@ -152,11 +148,11 @@ Controller.$inject = ['RandString'];
 module.exports = Controller;
 
 },{}],11:[function(require,module,exports){
-'use strict';
+"use strict";
 
 angular.module('Module.Users', []).controller('UsersController', require('./controller')).controller('CreateUsersController', require('./create/controller')).controller('InviteUsersController', require('./invite/controller')).config(['$stateProvider', function ($stateProvider) {
     $stateProvider.state('base.users', {
-        url: '/users',
+        url: '/admin/users',
         views: {
             'content@': {
                 templateUrl: 'templates/modules/users/users.html',

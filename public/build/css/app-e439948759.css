@@ -5750,48 +5750,64 @@ button.close {
     display: none !important; } }
 
 .panel-blue {
-  box-shadow: 1px 1px 5px 1px #a0c4e4;
+  box-shadow: 2px 2px 2px 1px #bbbbbb;
   border-color: #337ab7; }
   .panel-blue .panel-heading {
+    background-image: linear-gradient(to right, #286090 45%, #337ab7 45%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF286090', endColorstr='#FF337AB7', GradientType=1);
+    cursor: pointer;
     border-color: #337ab7;
-    color: white;
-    background-color: #337ab7; }
+    color: #c7ddef;
+    text-shadow: 1px 1px 1px #122b40; }
   .panel-blue a {
     color: #337ab7; }
     .panel-blue a:hover {
       color: #23527c; }
 
 .panel-green {
-  box-shadow: 1px 1px 5px 1px #c7e6c7;
+  box-shadow: 2px 2px 2px 1px #bbbbbb;
   border-color: #5cb85c; }
   .panel-green .panel-heading {
+    background-image: linear-gradient(to right, #449d44 45%, #5cb85c 45%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF449D44', endColorstr='#FF5CB85C', GradientType=1);
+    cursor: pointer;
     border-color: #5cb85c;
-    color: white;
-    background-color: #5cb85c; }
+    color: #eaf6ea;
+    text-shadow: 1px 1px 1px #255625; }
   .panel-green a {
     color: #5cb85c; }
     .panel-green a:hover {
       color: #3d8b3d; }
 
 .panel-yellow {
-  box-shadow: 1px 1px 5px 1px #fceedb;
+  box-shadow: 2px 2px 2px 1px #bbbbbb;
   border-color: #f0ad4e; }
   .panel-yellow .panel-heading {
+    background-image: linear-gradient(to right, #ec971f 45%, #f0ad4e 45%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFEC971F', endColorstr='#FFF0AD4E', GradientType=1);
+    cursor: pointer;
     border-color: #f0ad4e;
     color: white;
-    background-color: #f0ad4e; }
+    text-shadow: 1px 1px 1px #985f0d; }
   .panel-yellow a {
     color: #f0ad4e; }
     .panel-yellow a:hover {
       color: #df8a13; }
 
 .panel-red {
-  box-shadow: 1px 1px 5px 1px #f4cecd;
+  box-shadow: 2px 2px 2px 1px #bbbbbb;
   border-color: #d9534f; }
   .panel-red .panel-heading {
+    background-image: linear-gradient(to right, #c9302c 45%, #d9534f 45%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFC9302C', endColorstr='#FFD9534F', GradientType=1);
+    cursor: pointer;
     border-color: #d9534f;
-    color: white;
-    background-color: #d9534f; }
+    color: #fdf7f7;
+    text-shadow: 1px 1px 1px #761c19; }
   .panel-red a {
     color: #d9534f; }
     .panel-red a:hover {
@@ -5965,32 +5981,19 @@ button.close {
   border-top-right-radius: 0 0 4px 4px;
   border-top-left-radius: 0 0 4px 4px; }
 
-html, body {
-  height: 100%; }
-
-nav.navbar {
-  border-left: none;
-  border-right: none;
-  margin-bottom: 0;
-  z-index: 2; }
-  nav.navbar .navbar-brand {
-    width: 250px;
-    border-right: 1px solid #e7e7e7; }
-
-/**
- * Sidebar styling
- */
 .sidebar {
-  padding-top: 52px;
   z-index: 1;
-  background-color: #f8f8f8;
-  border-right: 1px solid #e7e7e7;
-  width: 250px;
-  position: absolute;
-  float: left;
-  left: 0;
-  top: 0;
-  bottom: 0; }
+  background-color: #f8f8f8; }
+  @media (min-width: 768px) {
+    .sidebar {
+      border-right: 1px solid #e7e7e7;
+      padding-top: 52px;
+      width: 250px;
+      position: absolute;
+      float: left;
+      left: 0;
+      top: 0;
+      bottom: 0; } }
 
 ul.sidebar-nav {
   padding-left: 0;
@@ -6017,10 +6020,47 @@ ul.sidebar-nav {
       ul.sidebar-nav > li > a:hover {
         background-color: #ebebeb; }
 
+@media (max-width: 768px) {
+  ul.sidebar-nav {
+    display: table;
+    border-bottom: 1px solid #e7e7e7;
+    width: 100%; }
+    ul.sidebar-nav > li {
+      display: table-cell;
+      vertical-align: middle;
+      border-bottom: none; }
+      ul.sidebar-nav > li.sidebar-search {
+        padding: 8px; }
+      ul.sidebar-nav > li > a {
+        text-align: center;
+        padding: 8px 12px; }
+        ul.sidebar-nav > li > a .fa {
+          font-size: 1.33333333em;
+          line-height: .75em;
+          vertical-align: -15%; } }
+
+html, body {
+  height: 100%; }
+
+nav.navbar {
+  border-left: none;
+  border-right: none;
+  margin-bottom: 0;
+  z-index: 2; }
+  @media (min-width: 768px) {
+    nav.navbar .navbar-brand {
+      width: 250px;
+      border-right: 1px solid #e7e7e7; } }
+
+/**
+ * Sidebar styling
+ */
 .content {
   min-height: 308px;
-  padding: 0 15px;
-  margin-left: 250px; }
+  padding: 0 15px; }
+  @media (min-width: 768px) {
+    .content {
+      margin-left: 250px; } }
 
 /**
  * Contextual helper classes

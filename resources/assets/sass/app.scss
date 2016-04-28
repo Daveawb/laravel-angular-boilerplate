@@ -1,12 +1,14 @@
 @import "variables";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-@import "mixins";
-@import "panels";
-@import "card";
 
 $sidebar-default-width:250px;
 $default-bg:$navbar-default-bg;
 $default-border:$navbar-default-border;
+
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "mixins";
+@import "panels";
+@import "card";
+@import "sidebar";
 
 html, body {
   height:100%;
@@ -26,70 +28,25 @@ nav.navbar {
   // We modify the brand to give it the same x dimensions as the sidebar
   // to align it and give a right border to match sidebar.
   .navbar-brand {
-    width:$sidebar-default-width;
-    border-right:1px solid $navbar-default-border;
+
+    @media(min-width:$grid-float-breakpoint) {
+      width: $sidebar-default-width;
+      border-right: 1px solid $navbar-default-border;
+    }
   }
 }
 
 /**
  * Sidebar styling
  */
-.sidebar {
-  padding-top:$navbar-height + 2;
-  z-index:1;
-  background-color:$default-bg;
-  border-right:1px solid $default-border;
-  width:250px;
-  position:absolute;
-  float:left;
-  left:0;
-  top:0;
-  bottom:0;
-}
-
-ul.sidebar-nav {
-  padding-left:0;
-  padding-right:0;
-  list-style:none;
-
-  & > li {
-    position:relative;
-    display:block;
-    border-bottom:1px solid $default-border;
-
-    &.sidebar-search {
-      padding:15px;
-    }
-
-    &.active {
-      background-color:$brand-primary;
-      margin-right:-1px;
-
-      & > a {
-        color:#f9f9f9;
-        &:hover {
-          background-color: darken($brand-primary, 5%);
-        }
-      }
-    }
-
-    & > a {
-      position:relative;
-      display:block;
-      padding:10px 15px;
-      text-decoration: none;
-
-      &:hover {
-        background-color:darken($default-bg, 5%);
-      }
-    }
-  }
-}
 
 .content {
   min-height:308px;
   padding:0 15px;
-  margin-left:$sidebar-default-width;
+
+  @media(min-width:$grid-float-breakpoint) {
+    margin-left: $sidebar-default-width;
+  }
 }
 
 /**

@@ -1,16 +1,14 @@
-var Controller = function() {
+"use strict";
+
+var Controller = function () {
     this.links = [
         {
-            sref:"base.dashboard",
-            title:"Dashboard",
-            icon:"fa-dashboard"
-        }, {
-            sref:"base.users",
-            title:"Users",
-            icon:"fa-users"
+            sref: "base.dashboard",
+            title: "Dashboard",
+            icon: "fa-dashboard"
         }
-    ]
-}
+    ];
+};
 
 Controller.$inject = [];
 

@@ -1,3 +1,5 @@
+"use strict";
+
 require('./components/sidebar');
 require('./components/navbar');
 require('./modules/dashboard');
@@ -17,10 +19,10 @@ angular.module('User', [
     .factory('RandString', require('../common/randomstring'))
     .config(['$locationProvider', '$urlRouterProvider', function ($locationProvider, $urlRouterProvider) {
         $locationProvider.html5Mode(true);
-        $urlRouterProvider.otherwise("/");
+        $urlRouterProvider.otherwise("/admin");
     }])
 
-    .config(['$stateProvider', function($stateProvider) {
+    .config(['$stateProvider', function ($stateProvider) {
         $stateProvider.state('base', {
             abstract: true,
             views: {

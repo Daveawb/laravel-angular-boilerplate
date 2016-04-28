@@ -6,12 +6,15 @@
 
 @mixin context-panel($name, $colour) {
   .panel-#{$name} {
-    box-shadow:1px 1px 5px 1px lighten($colour, 30%);
+    @include box-shadow(2px 2px 2px 1px lighten($gray, 40%));
     border-color: $colour;
     .panel-heading {
+      @include gradient-horizontal(darken($colour, 10%), $colour, 45%, 45%);
+      cursor:pointer;
       border-color: $colour;
-      color: white;
-      background-color: $colour;
+      color: lighten($colour, 40%);
+      text-shadow: 1px 1px 1px darken($colour, 30%);
+      //background-color: $colour;
     }
     a {
       color: $colour;

@@ -25,7 +25,7 @@
     <script type="text/javascript" src="/js/vendor.js" defer></script>
     <script type="text/javascript" src="{{ elixir('js/user/templates.js') }}" defer></script>
     <script type="text/javascript" src="{{ elixir('js/user/app.js') }}" defer></script>
-    <base href="/" />
+    <base href="/admin" />
 </head>
 
 <body ng-app="User">

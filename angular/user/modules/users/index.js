@@ -1,10 +1,12 @@
+"use strict";
+
 angular.module('Module.Users', [])
     .controller('UsersController', require('./controller'))
     .controller('CreateUsersController', require('./create/controller'))
     .controller('InviteUsersController', require('./invite/controller'))
-    .config(['$stateProvider', function($stateProvider) {
+    .config(['$stateProvider', function ($stateProvider) {
         $stateProvider.state('base.users', {
-            url: '/users',
+            url: '/admin/users',
             views: {
                 'content@' : {
                     templateUrl: 'templates/modules/users/users.html',

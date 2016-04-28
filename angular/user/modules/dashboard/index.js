@@ -1,8 +1,10 @@
+"use strict";
+
 angular.module('Module.Dashboard', [])
     .controller('DashboardController', require('./controller'))
-    .config(['$stateProvider', function($stateProvider) {
+    .config(['$stateProvider', function ($stateProvider) {
         $stateProvider.state('base.dashboard', {
-            url: '/',
+            url: '/admin',
             views: {
                 'content@' : {
                     templateUrl: 'templates/modules/dashboard/dashboard.html',

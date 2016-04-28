@@ -18,6 +18,6 @@ class WelcomeController extends Controller {
      */
     public function index()
     {
-        return view('public.welcome');
+        return view('marketing.welcome');
     }
 }
