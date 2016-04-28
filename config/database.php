@@ -52,6 +52,13 @@ return [
             'prefix' => '',
         ],
 
+        // Used by PHPUnit for tests
+        'sqlite_testing' => [
+            'driver' => 'sqlite',
+            'database' => env('TEST_DATABASE', database_path('tests.sqlite')),
+            'prefix' => '',
+        ],
+
         'mysql' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', 'localhost'),

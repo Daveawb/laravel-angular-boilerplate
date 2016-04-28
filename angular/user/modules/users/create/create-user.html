@@ -89,7 +89,9 @@
                 <div class="col-sm-offset-2 col-sm-10">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" ng-model="createusers.user.noemail"> Don't send confirmation email.
+                            <input type="checkbox"
+                                   ng-model="createusers.user.noemail"
+                                   ng-click="createusers.uncheckCopyMe()"> Don't send confirmation email.
                         </label>
                     </div>
                 </div>

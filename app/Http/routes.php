@@ -20,9 +20,12 @@ $router->group(['middleware' => ['guest']], function($router) {
     $router->get('/', 'Marketing\WelcomeController@index');
 });
 
-$router->group(['middleware' => ['web', 'auth']], function($router) {
+$router->group(['middleware' => ['auth']], function($router) {
     $router->get('/', 'User\WelcomeController@index');
 });
 
-$router->auth();
+$router->group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => ['api']], function($router) {
+    $router->resource('user', 'UserController', ['except' => ['create', 'edit']]);
+});
 
+$router->auth();

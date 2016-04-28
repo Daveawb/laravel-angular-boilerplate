@@ -2,6 +2,8 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\ApiAuthenticate;
+use App\Http\Middleware\ApiJsonAcceptance;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -32,6 +34,8 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
+            ApiAuthenticate::class,
+            ApiJsonAcceptance::class,
             'throttle:60,1',
         ],
     ];

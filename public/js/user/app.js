@@ -141,6 +141,10 @@ var Controller = function Controller(RandString) {
     this.showpassword = function () {
         this.passwordDisplay = !this.passwordDisplay;
     };
+
+    this.uncheckCopyMe = function () {
+        this.user.copyme = false;
+    };
 };
 
 Controller.$inject = ['RandString'];
