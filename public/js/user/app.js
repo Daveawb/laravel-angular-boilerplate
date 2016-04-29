@@ -101,8 +101,37 @@ module.exports = Controller;
 angular.module('Component.SideBar', []).controller('SideBarController', require('./controller'));
 
 },{"./controller":5}],7:[function(require,module,exports){
-arguments[4][3][0].apply(exports,arguments)
-},{"dup":3}],8:[function(require,module,exports){
+'use strict';
+
+var Controller = function Controller() {
+    this.widgets = [{
+        title: 'Users',
+        colour: 'blue',
+        info: 1,
+        icon: 'fa-users'
+    }, {
+        title: 'Posts',
+        colour: 'green',
+        info: 42,
+        icon: 'fa-newspaper-o'
+    }, {
+        title: 'Links',
+        colour: 'yellow',
+        info: 87,
+        icon: 'fa-link'
+    }, {
+        title: 'Comments',
+        colour: 'red',
+        info: 293,
+        icon: 'fa-comments'
+    }];
+};
+
+Controller.$inject = [];
+
+module.exports = Controller;
+
+},{}],8:[function(require,module,exports){
 "use strict";
 
 angular.module('Module.Dashboard', []).controller('DashboardController', require('./controller')).config(['$stateProvider', function ($stateProvider) {

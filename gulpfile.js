@@ -23,6 +23,8 @@ var scripts = [
 
 elixir(function(mixr) {
     mixr.sass('app.scss')
+        .sass('marketing.scss')
+        .copy('node_modules/font-awesome/fonts', 'public/fonts')
         .scripts(scripts, 'public/js/vendor.js', 'node_modules')
         .browserify('bootstrap.js', 'public/js/admin/app.js', 'angular/admin/')
         .browserify('bootstrap.js', 'public/js/user/app.js', 'angular/user/')
@@ -49,6 +51,7 @@ elixir(function(mixr) {
             'public/js/admin/templates.js',
             'public/js/user/app.js',
             'public/js/user/templates.js',
-            'public/css/app.css'
+            'public/css/app.css',
+            'public/css/marketing.css'
         ]);
 });

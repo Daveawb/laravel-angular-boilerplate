@@ -6,8 +6,16 @@
 </div>
 
 <div class="row vertical-padding">
-    <div class="col-xs-12">
-        <div class="btn-toolbar" role="toolbar">
+    <div class="col-xs-6">
+		<div class="input-group">
+			<input type="text" class="form-control" placeholder="Search users...">
+			<span class="input-group-btn">
+				<button class="btn btn-default"><i class="fa fa-search"></i></button>
+			</span>
+		</div>
+	</div>
+	<div class="col-xs-6">
+        <div class="btn-toolbar pull-right" role="toolbar">
             <div class="btn-group">
                 <button type="button" class="btn btn-default" ui-sref="base.users.create">
                     <i class="fa fa-plus-circle"></i> Create a user
@@ -17,6 +25,7 @@
                 </button>
             </div>
         </div>
+        <div class="clearfix"></div>
     </div>
 </div>
 

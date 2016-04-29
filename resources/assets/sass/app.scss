@@ -3,11 +3,12 @@
 $sidebar-default-width:250px;
 $default-bg:$navbar-default-bg;
 $default-border:$navbar-default-border;
+$fa-font-path: "../../fonts";
 
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "node_modules/font-awesome/scss/font-awesome";
 @import "mixins";
 @import "panels";
-@import "card";
 @import "sidebar";
 
 html, body {
@@ -49,11 +50,17 @@ nav.navbar {
   }
 }
 
+
+
 /**
  * Contextual helper classes
  */
 .huge {
   font-size: 40px;
+}
+
+.fa-va {
+  vertical-align:middle;
 }
 
 /**

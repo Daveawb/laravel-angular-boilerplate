@@ -1,0 +1,104 @@
+$fa-font-path: "../../fonts";
+$font-family-sans-serif:  "Lato", Helvetica, Arial, sans-serif;
+$headings-font-weight: 300;
+
+@import "variables";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "node_modules/font-awesome/scss/font-awesome";
+@import "mixins";
+
+// Extra small grid spacers
+//
+// Columns, offsets, pushes, and pulls for extra small devices like
+// smartphones.
+
+@include make-row-spacers(xs);
+
+
+// Small grid spacers
+//
+// Columns, offsets, pushes, and pulls for the small device range, from phones
+// to tablets.
+
+@media (min-width: $screen-sm-min) {
+  @include make-row-spacers(sm);
+}
+
+
+// Medium grid spacers
+//
+// Columns, offsets, pushes, and pulls for the desktop device range.
+
+@media (min-width: $screen-md-min) {
+  @include make-row-spacers(md);
+}
+
+
+// Large grid spacers
+//
+// Columns, offsets, pushes, and pulls for the large desktop device range.
+
+@media (min-width: $screen-lg-min) {
+  @include make-row-spacers(lg);
+}
+
+.panel-login {
+  display:table;
+  width:100%;
+
+  @media(max-width:$screen-sm-max) {
+    display:inline-block;
+    border:1px solid transparent;
+
+    .h2 {
+      font-size: ceil($font-size-base * 1.8);
+    }
+  }
+
+  .branding, .login {
+    padding:15px;
+  }
+
+  .branding{
+    text-align:center;
+    color:$gray-lighter;
+    background-color:$brand-primary;
+    vertical-align:middle;
+    display:table-cell;
+    width:50%;
+    height: 100%;
+
+    @media(max-width:$screen-sm-max) {
+      width:auto;
+      display:block;
+      margin-left:-15px;
+      margin-right:-15px;
+    }
+  }
+
+  .login {
+    display:table-cell;
+    width:50%;
+    height: 100%;
+
+    @media(max-width:$screen-sm-max) {
+      width:100%;
+    }
+  }
+}
+
+
+
+.btn {
+  &.btn-facebook {
+    @include button-variant(#3b5998, #f7f7f7, #dfe3ee);
+  }
+
+  &.btn-google-plus {
+    @include button-variant(#d34836, #f7f7f7, #dfe3ee);
+  }
+
+  &.btn-twitter {
+    @include button-variant(#00aced, #f7f7f7, #dfe3ee);
+  }
+}

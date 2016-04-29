@@ -9,7 +9,7 @@
     @include box-shadow(2px 2px 2px 1px lighten($gray, 40%));
     border-color: $colour;
     .panel-heading {
-      @include gradient-horizontal(darken($colour, 10%), $colour, 45%, 45%);
+      @include gradient-horizontal(darken($colour, 10%), $colour, 125px, 125px);
       cursor:pointer;
       border-color: $colour;
       color: lighten($colour, 40%);
@@ -25,47 +25,12 @@
   }
 }
 
-@mixin border-radius($radius) {
-  @include border-bottom-radius($radius);
-  @include border-top-radius($radius);
-}
+@mixin make-row-spacers($class) {
+  @for $i from 1 through 4 {
+    $spacer: $i * $row-spacer-increment;
 
-//== Card Mixins
-// Card variants
-
-@mixin card-variant($background, $border) {
-  background-color: $background;
-  border-color: $border;
-}
-
-@mixin card-outline-variant($color) {
-  background-color: transparent;
-  border-color: $color;
-}
-
-//
-// Inverse text within a card for use with dark backgrounds
-//
-
-@mixin card-inverse {
-  .card-header,
-  .card-footer {
-    border-bottom: $card-border-width solid rgba(255,255,255,.2);
+    .spacer-#{$class}-#{$spacer} {
+      margin-bottom:$spacer + px;
+    }
   }
-  .card-header,
-  .card-footer,
-  .card-title,
-  .card-blockquote {
-    color: #fff;
-  }
-  .card-link,
-  .card-text,
-  .card-blockquote > footer {
-    color: rgba(255,255,255,.65);
-  }
-  //.card-link {
-  //  @include hover-focus {
-  //    color: $card-link-hover-color;
-  //  }
-  //}
 }

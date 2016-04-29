@@ -16,6 +16,7 @@ $router = app('router');
 
 $router->group(['prefix' => 'admin', 'middleware' => 'auth'], function($router) {
     $router->get('/', 'User\WelcomeController@index');
+    $router->get('/{any}', 'User\WelcomeController@index')->where('any', '.*');
 });
 
 $router->group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => ['api']], function($router) {
