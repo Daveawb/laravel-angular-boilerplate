@@ -1,4 +1,4 @@
-var Controller = function(RandString) {
+var Controller = function(RandString, $modalInstance) {
 
     this.user = {};
 
@@ -17,8 +17,18 @@ var Controller = function(RandString) {
     this.uncheckCopyMe = function() {
         this.user.copyme=false;
     }
+
+    this.create = function() {
+        "use strict";
+
+    }
+
+    this.cancel = function() {
+        "use strict";
+        $modalInstance.dismiss('cancel');
+    }
 }
 
-Controller.$inject = ['RandString'];
+Controller.$inject = ['RandString', '$uibModalInstance'];
 
 module.exports = Controller;

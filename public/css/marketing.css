@@ -7957,6 +7957,16 @@ button.close {
   .spacer-lg-16 {
     margin-bottom: 16px; } }
 
+@media (min-width: 992px) {
+  .container-flex-center {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100vh;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center; } }
+
 .panel-login {
   display: table;
   width: 100%; }
@@ -7988,7 +7998,8 @@ button.close {
     height: 100%; }
     @media (max-width: 991px) {
       .panel-login .login {
-        width: 100%; } }
+        display: block;
+        width: auto; } }
 
 .btn.btn-facebook {
   color: #3b5998;

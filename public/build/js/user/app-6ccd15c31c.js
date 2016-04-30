@@ -1,4 +1,34 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+'use strict';
+
+angular.module('Common.Directives', []).directive('minHeight', require('./minHeight'));
+
+},{"./minHeight":2}],2:[function(require,module,exports){
+'use strict';
+
+var Directive = function Directive($window, $timeout) {
+    return {
+        restrict: 'A',
+        link: function link(scope, element, attrs) {
+            // Get navbar height
+            var navbar = $window.document.getElementsByClassName('navbar');
+
+            $timeout(minHeight); // make sure angular has proceeded the binding
+            angular.element($window).bind('resize', minHeight);
+
+            function minHeight() {
+                var minHeight = $window.innerHeight - navbar[0].offsetHeight;
+                element.css('min-height', minHeight + 'px');
+            }
+        }
+    };
+};
+
+Directive.$inject = ['$window', '$timeout'];
+
+module.exports = Directive;
+
+},{}],3:[function(require,module,exports){
 "use strict";
 
 var Factory = function Factory() {
@@ -28,15 +58,15 @@ Factory.$inject = [];
 
 module.exports = Factory;
 
-},{}],2:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 "use strict";
 
-require('./components/sidebar');
-require('./components/navbar');
+require('./components/navigation');
 require('./modules/dashboard');
 require('./modules/users');
+require('../common/directives');
 
-angular.module('User', ['Templates', 'ui.bootstrap', 'ui.router', 'ngAnimate', 'Component.SideBar', 'Component.NavBar', 'Module.Dashboard', 'Module.Users']).factory('RandString', require('../common/randomstring')).config(['$locationProvider', '$urlRouterProvider', function ($locationProvider, $urlRouterProvider) {
+angular.module('User', ['Templates', 'ui.bootstrap', 'ui.router', 'ngAnimate', 'Common.Directives', 'Component.NavBar', 'Module.Dashboard', 'Module.Users']).factory('RandString', require('../common/randomstring')).config(['$locationProvider', '$urlRouterProvider', function ($locationProvider, $urlRouterProvider) {
     $locationProvider.html5Mode(true);
     $urlRouterProvider.otherwise("/admin");
 }]).config(['$stateProvider', function ($stateProvider) {
@@ -44,46 +74,19 @@ angular.module('User', ['Templates', 'ui.bootstrap', 'ui.router', 'ngAnimate', '
         abstract: true,
         views: {
             'navbar@': {
-                templateUrl: 'templates/components/navbar/navbar.html',
+                templateUrl: 'templates/components/navigation/navbar.html',
                 controller: 'NavbarController as navbar'
-            },
-            'sidebar@': {
-                templateUrl: 'templates/components/sidebar/sidebar.html',
-                controller: 'SideBarController as sidebar'
             }
         }
     });
 }]);
 
-},{"../common/randomstring":1,"./components/navbar":4,"./components/sidebar":6,"./modules/dashboard":8,"./modules/users":11}],3:[function(require,module,exports){
+},{"../common/directives":1,"../common/randomstring":3,"./components/navigation":6,"./modules/dashboard":8,"./modules/users":11}],5:[function(require,module,exports){
 "use strict";
 
 var Controller = function Controller() {
     this.isCollapsed = true;
-};
 
-Controller.$inject = [];
-
-module.exports = Controller;
-
-},{}],4:[function(require,module,exports){
-'use strict';
-
-angular.module('Component.NavBar', []).controller('NavbarController', require('./controller')).config(['$stateProvider', function ($stateProvider) {
-    $stateProvider.state('root', {
-        views: {
-            'navbar@root': {
-                templateUrl: 'templates/components/navbar/navbar.html',
-                controller: 'NavbarController as navbar'
-            }
-        }
-    });
-}]);
-
-},{"./controller":3}],5:[function(require,module,exports){
-"use strict";
-
-var Controller = function Controller() {
     this.links = [{
         sref: "base.dashboard",
         title: "Dashboard",
@@ -98,7 +101,7 @@ module.exports = Controller;
 },{}],6:[function(require,module,exports){
 'use strict';
 
-angular.module('Component.SideBar', []).controller('SideBarController', require('./controller'));
+angular.module('Component.NavBar', []).controller('NavbarController', require('./controller'));
 
 },{"./controller":5}],7:[function(require,module,exports){
 'use strict';
@@ -147,11 +150,20 @@ angular.module('Module.Dashboard', []).controller('DashboardController', require
 }]);
 
 },{"./controller":7}],9:[function(require,module,exports){
-arguments[4][3][0].apply(exports,arguments)
-},{"dup":3}],10:[function(require,module,exports){
-'use strict';
+"use strict";
 
-var Controller = function Controller(RandString) {
+var Controller = function Controller() {
+    this.isCollapsed = true;
+};
+
+Controller.$inject = [];
+
+module.exports = Controller;
+
+},{}],10:[function(require,module,exports){
+"use strict";
+
+var Controller = function Controller(RandString, $modalInstance) {
 
     this.user = {};
 
@@ -170,16 +182,24 @@ var Controller = function Controller(RandString) {
     this.uncheckCopyMe = function () {
         this.user.copyme = false;
     };
+
+    this.create = function () {};
+
+    this.cancel = function () {
+        "use strict";
+
+        $modalInstance.dismiss('cancel');
+    };
 };
 
-Controller.$inject = ['RandString'];
+Controller.$inject = ['RandString', '$uibModalInstance'];
 
 module.exports = Controller;
 
 },{}],11:[function(require,module,exports){
 "use strict";
 
-angular.module('Module.Users', []).controller('UsersController', require('./controller')).controller('CreateUsersController', require('./create/controller')).controller('InviteUsersController', require('./invite/controller')).config(['$stateProvider', function ($stateProvider) {
+window.angular.module('Module.Users', []).controller('UsersController', require('./controller')).controller('CreateUsersController', require('./create/controller')).controller('InviteUsersController', require('./invite/controller')).config(['$stateProvider', function ($stateProvider) {
     $stateProvider.state('base.users', {
         url: '/admin/users',
         views: {
@@ -190,14 +210,23 @@ angular.module('Module.Users', []).controller('UsersController', require('./cont
         }
     });
 
-    $stateProvider.state('base.users.create', {
-        url: '/create',
-        views: {
-            'content@': {
+    $stateProvider.state("base.users.create", {
+        url: "/create",
+        onEnter: ['$state', '$uibModal', function ($state, $modal) {
+            $modal.open({
+                animation: true,
                 templateUrl: 'templates/modules/users/create/create-user.html',
-                controller: 'CreateUsersController as createusers'
-            }
-        }
+                controller: 'CreateUsersController as createuser',
+                size: 'xs',
+                resolve: {
+                    item: function item() {
+                        return null;
+                    }
+                }
+            }).result.finally(function () {
+                $state.go('^');
+            });
+        }]
     });
 
     $stateProvider.state('base.users.invite', {
@@ -220,6 +249,6 @@ Controller.$inject = [];
 
 module.exports = Controller;
 
-},{}]},{},[2]);
+},{}]},{},[4]);
 
 //# sourceMappingURL=app.js.map

@@ -3,7 +3,5 @@
 @section('content')
     <header ui-view="navbar"></header>
 
-    <div ui-view="sidebar" class="sidebar"></div>
-
-    <div ui-view="content" class="content"></div>
+    <div ui-view="content" class="content" min-height></div>
 @endsection

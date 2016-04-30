@@ -1,6 +1,6 @@
-"use strict";
+var Controller = function() {
+    this.isCollapsed = true;
 
-var Controller = function () {
     this.links = [
         {
             sref: "base.dashboard",
@@ -8,7 +8,7 @@ var Controller = function () {
             icon: "fa-dashboard"
         }
     ];
-};
+}
 
 Controller.$inject = [];
 

@@ -7981,41 +7981,33 @@ button.close {
 
 .sidebar {
   z-index: 1;
-  background-color: #f8f8f8; }
-  @media (min-width: 768px) {
-    .sidebar {
-      border-right: 1px solid #e7e7e7;
-      padding-top: 52px;
-      width: 250px;
-      position: absolute;
-      float: left;
-      left: 0;
-      top: 0;
-      bottom: 0; } }
-
-ul.sidebar-nav {
   padding-left: 0;
   padding-right: 0;
   list-style: none; }
-  ul.sidebar-nav > li {
+  @media (min-width: 768px) {
+    .sidebar {
+      width: 250px;
+      position: absolute;
+      left: 0;
+      top: 51px; } }
+  .sidebar > li {
     position: relative;
     display: block;
     border-bottom: 1px solid #e7e7e7; }
-    ul.sidebar-nav > li.sidebar-search {
+    .sidebar > li.sidebar-search {
       padding: 15px; }
-    ul.sidebar-nav > li.active {
-      background-color: #337ab7;
-      margin-right: -1px; }
-      ul.sidebar-nav > li.active > a {
+    .sidebar > li.active {
+      background-color: #337ab7; }
+      .sidebar > li.active > a {
         color: #f9f9f9; }
-        ul.sidebar-nav > li.active > a:hover {
+        .sidebar > li.active > a:hover {
           background-color: #2e6da4; }
-    ul.sidebar-nav > li > a {
+    .sidebar > li > a {
       position: relative;
       display: block;
       padding: 10px 15px;
       text-decoration: none; }
-      ul.sidebar-nav > li > a:hover {
+      .sidebar > li > a:hover {
         background-color: #ebebeb; }
 
 @media (max-width: 768px) {
@@ -8040,6 +8032,9 @@ ul.sidebar-nav {
 html, body {
   height: 100%; }
 
+body {
+  background-color: #f8f8f8; }
+
 nav.navbar {
   border-left: none;
   border-right: none;
@@ -8047,15 +8042,18 @@ nav.navbar {
   z-index: 2; }
   @media (min-width: 768px) {
     nav.navbar .navbar-brand {
-      width: 250px;
+      width: 251px;
       border-right: 1px solid #e7e7e7; } }
+  nav.navbar .navbar-top-links {
+    margin-right: 0; }
 
 /**
  * Sidebar styling
  */
 .content {
-  min-height: 308px;
-  padding: 0 15px; }
+  padding: 0 15px;
+  border-left: 1px solid #e7e7e7;
+  background-color: #fff; }
   @media (min-width: 768px) {
     .content {
       margin-left: 250px; } }

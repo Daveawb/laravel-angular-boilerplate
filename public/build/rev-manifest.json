@@ -1,8 +1,8 @@
 {
-  "css/app.css": "css/app-a869022499.css",
-  "css/marketing.css": "css/marketing-2dd829132e.css",
+  "css/app.css": "css/app-be24ad6d11.css",
+  "css/marketing.css": "css/marketing-bc5bff4263.css",
   "js/admin/app.js": "js/admin/app-ab736536a7.js",
   "js/admin/templates.js": "js/admin/templates-115187233f.js",
-  "js/user/app.js": "js/user/app-374df419db.js",
-  "js/user/templates.js": "js/user/templates-140fa4ed41.js"
+  "js/user/app.js": "js/user/app-6ccd15c31c.js",
+  "js/user/templates.js": "js/user/templates-edae62beab.js"
 }

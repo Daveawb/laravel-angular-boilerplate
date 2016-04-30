@@ -1,16 +1,16 @@
 "use strict";
 
-require('./components/sidebar');
-require('./components/navbar');
+require('./components/navigation');
 require('./modules/dashboard');
 require('./modules/users');
+require('../common/directives');
 
 angular.module('User', [
     'Templates',
     'ui.bootstrap',
     'ui.router',
     'ngAnimate',
-    'Component.SideBar',
+    'Common.Directives',
     'Component.NavBar',
     'Module.Dashboard',
     'Module.Users'
@@ -27,12 +27,8 @@ angular.module('User', [
             abstract: true,
             views: {
                 'navbar@' : {
-                    templateUrl: 'templates/components/navbar/navbar.html',
+                    templateUrl: 'templates/components/navigation/navbar.html',
                     controller: 'NavbarController as navbar'
-                },
-                'sidebar@' : {
-                    templateUrl: 'templates/components/sidebar/sidebar.html',
-                    controller: 'SideBarController as sidebar'
                 }
             }
         });

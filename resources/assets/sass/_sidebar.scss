@@ -1,23 +1,16 @@
 .sidebar {
   z-index:1;
-  background-color:$default-bg;
-
-  @media(min-width:$grid-float-breakpoint) {
-    border-right:1px solid $default-border;
-    padding-top:$navbar-height + 2;
-    width: 250px;
-    position: absolute;
-    float: left;
-    left: 0;
-    top: 0;
-    bottom: 0;
-  }
-}
-
-ul.sidebar-nav {
   padding-left:0;
   padding-right:0;
   list-style:none;
+
+  @media(min-width:$grid-float-breakpoint) {
+    width: $sidebar-default-width;
+    position: absolute;
+    left: 0;
+    top: $navbar-height + 1;
+    //bottom: 0;
+  }
 
   & > li {
     position:relative;
@@ -30,7 +23,6 @@ ul.sidebar-nav {
 
     &.active {
       background-color:$brand-primary;
-      margin-right:-1px;
 
       & > a {
         color:#f9f9f9;

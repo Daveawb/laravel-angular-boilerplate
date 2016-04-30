@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('Module.Users', [])
+window.angular.module('Module.Users', [])
     .controller('UsersController', require('./controller'))
     .controller('CreateUsersController', require('./create/controller'))
     .controller('InviteUsersController', require('./invite/controller'))
@@ -15,14 +15,23 @@ angular.module('Module.Users', [])
             }
         });
 
-        $stateProvider.state('base.users.create', {
-            url: '/create',
-            views: {
-                'content@' : {
+        $stateProvider.state("base.users.create", {
+            url: "/create",
+            onEnter: ['$state', '$uibModal', function ($state, $modal) {
+                $modal.open({
+                    animation: true,
                     templateUrl: 'templates/modules/users/create/create-user.html',
-                    controller: 'CreateUsersController as createusers'
-                }
-            }
+                    controller: 'CreateUsersController as createuser',
+                    size: 'xs',
+                    resolve: {
+                        item : function () {
+                            return null;
+                        }
+                    }
+                }).result.finally(function () {
+                    $state.go('^');
+                });
+            }]
         });
 
         $stateProvider.state('base.users.invite', {
