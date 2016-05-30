@@ -21,6 +21,7 @@ $router->group(['prefix' => 'admin', 'middleware' => 'auth'], function($router) 
 
 $router->group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => ['api']], function($router) {
     $router->resource('user', 'UserController', ['except' => ['create', 'edit']]);
+    $router->resource('group', 'GroupController', ['except' => ['create', 'edit']]);
 });
 
 $router->group(['middleware' => []], function($router) {

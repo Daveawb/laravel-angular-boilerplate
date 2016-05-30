@@ -1,10 +1,14 @@
 <?php
 
-namespace App;
+namespace App\Resources;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * Class User
+ * @package App
+ */
 class User extends Authenticatable
 {
     use SoftDeletes;

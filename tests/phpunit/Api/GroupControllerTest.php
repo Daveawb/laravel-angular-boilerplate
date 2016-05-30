@@ -1,14 +1,13 @@
 <?php
 
+use App\Resources\Group;
 use App\Resources\User;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Http\Response;
 
-/**
- * Class UserControllerTest
- */
-class UserControllerTest extends TestCase
+class GroupControllerTest extends TestCase
 {
     use DatabaseMigrations;
     use DatabaseTransactions;
@@ -19,6 +18,16 @@ class UserControllerTest extends TestCase
     private $user;
 
     /**
+     * @var Group
+     */
+    private $group;
+
+    /**
+     * @var array
+     */
+    private $structure = ['name', 'level', 'updated_at', 'created_at', 'deleted_at'];
+
+    /**
      * Create a dummy user for each test.
      */
     public function setUp()
@@ -26,6 +35,7 @@ class UserControllerTest extends TestCase
         parent::setUp();
 
         $this->user = $user = factory(User::class)->create();
+        $this->group = $group = factory(Group::class)->create();
     }
 
     /**
@@ -33,11 +43,11 @@ class UserControllerTest extends TestCase
      *
      * @return void
      */
-    public function testIndexGetsListOfUsers()
+    public function testIndexGetsListOfGroups()
     {
         $this->actingAs($this->user)
-            ->json('GET', '/api/user')
-            ->seeJsonStructure(['*' => ['id', 'name', 'email', 'created_at', 'updated_at']])
+            ->json('GET', '/api/group')
+            ->seeJsonStructure(['*' => $this->structure])
             ->assertResponseStatus(Response::HTTP_OK);
     }
 
@@ -48,18 +58,18 @@ class UserControllerTest extends TestCase
      */
     public function testIndexReturnsUnauthorized()
     {
-        $this->json('GET', '/api/user')
+        $this->json('GET', '/api/group')
             ->assertResponseStatus(Response::HTTP_UNAUTHORIZED);
     }
 
     /**
      * Get a single user test.
      */
-    public function testShowGetsUser()
+    public function testShowGetsGroup()
     {
         $this->actingAs($this->user)
-            ->json('GET', '/api/user/1')
-            ->seeJsonStructure(['id', 'name', 'email', 'created_at', 'updated_at'])
+            ->json('GET', '/api/group/1')
+            ->seeJsonStructure($this->structure)
             ->assertResponseStatus(Response::HTTP_OK);
     }
 
@@ -68,45 +78,45 @@ class UserControllerTest extends TestCase
      */
     public function testShowReturnsUnauthorized()
     {
-        $this->json('GET', '/api/user/1')
+        $this->json('GET', '/api/group/1')
             ->assertResponseStatus(Response::HTTP_UNAUTHORIZED);
     }
 
     /**
      * Test when a user doesn't exist returns a not found.
      */
-    public function testShowFailsGettingNonUser()
+    public function testShowFailsGettingNonGroup()
     {
         $this->actingAs($this->user)
-            ->json('GET', '/api/user/2')
+            ->json('GET', '/api/group/2')
             ->assertResponseStatus(Response::HTTP_NOT_FOUND);
     }
 
     /**
      * Test creating a valid user returns the user.
      */
-    public function testCreateAUser()
+    public function testCreateAGroup()
     {
         $this->actingAs($this->user)
-            ->json('POST', '/api/user', $this->newUser())
-            ->seeJsonStructure(['id', 'name', 'email', 'created_at', 'updated_at']);
+            ->json('POST', '/api/group', $this->newGroup())
+            ->seeJsonContains($this->newGroup());
     }
 
     /**
      *
      */
-    public function testCreateUserValidation()
+    public function testCreateGroupValidation()
     {
-        $newUser = $this->newUser();
+        $newGroup = $this->newGroup();
 
         // Loop delimited by new users length
-        for($i = 0; $i < count($newUser); $i++) {
+        for($i = 0; $i < count($newGroup); $i++) {
 
-            // Copy the new user array
-            $test = $newUser;
+            // Copy the new group array
+            $test = $newGroup;
 
             // Current key
-            $key = key($newUser);
+            $key = key($newGroup);
 
             // Unset a key=>value pair from the test by removing the
             // current key of the newuser array.
@@ -114,12 +124,12 @@ class UserControllerTest extends TestCase
 
             // Run the test
             $this->actingAs($this->user)
-                ->json('POST', '/api/user', $test)
+                ->json('POST', '/api/group', $test)
                 ->seeJsonStructure([$this->getValidationKey($key)])
                 ->assertResponseStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 
             // Increment the array pointer on the new user array
-            next($newUser);
+            next($newGroup);
         }
     }
 
@@ -128,92 +138,92 @@ class UserControllerTest extends TestCase
      *
      * @return void
      */
-    public function testCreateUserReturnsUnauthorized()
+    public function testCreateGroupReturnsUnauthorized()
     {
-        $newUser = $this->newUser();
+        $newGroup = $this->newGroup();
 
-        $this->json('POST', '/api/user', $newUser)
+        $this->json('POST', '/api/group', $newGroup)
             ->assertResponseStatus(Response::HTTP_UNAUTHORIZED);
     }
 
     /**
      * Test updating a user works correctly.
      */
-    public function testUpdateAUser()
+    public function testUpdateAGroup()
     {
-        $updatedUser = $this->user;
+        $updatedGroup = $this->group;
 
-        $updatedUser->email = "newemail@example.dev";
+        $updatedGroup->name = "administrators";
 
         $this->actingAs($this->user)
-            ->json('PATCH', '/api/user/1', $updatedUser->toArray())
-            ->seeJsonStructure(['id', 'name', 'email', 'created_at', 'updated_at'])
-            ->seeJson(['email' => $updatedUser->email])
+            ->json('PATCH', '/api/group/1', $updatedGroup->toArray())
+            ->seeJsonStructure($this->structure)
+            ->seeJson(['name' => 'administrators'])
             ->assertResponseStatus(Response::HTTP_OK);
     }
 
     /**
      * Test an unauthorized user can't update a user.
      */
-    public function testUpdateAUserReturnsUnauthorized()
+    public function testUpdateAGroupReturnsUnauthorized()
     {
-        $updatedUser = $this->user;
+        $updatedGroup = $this->group;
 
-        $updatedUser->email = "newemail@example.dev";
+        $updatedGroup->name = "administrators";
 
-        $this->json('PATCH', '/api/user/1', $updatedUser->toArray())
+        $this->json('PATCH', '/api/group/1', $updatedGroup->toArray())
             ->assertResponseStatus(Response::HTTP_UNAUTHORIZED);
     }
 
     /**
      * Test that a non existent user returns not found.
      */
-    public function testUpdateAUserFailsOnANonUser()
+    public function testUpdateAGroupFailsOnANonGroup()
     {
-        $updatedUser = $this->user;
+        $updatedGroup = $this->group;
 
-        $updatedUser->email = "newemail@example.dev";
+        $updatedGroup->name = "administrators";
 
         $this->actingAs($this->user)
-            ->json('PATCH', '/api/user/2', $updatedUser->toArray())
+            ->json('PATCH', '/api/group/2', $updatedGroup->toArray())
             ->assertResponseStatus(Response::HTTP_NOT_FOUND);
     }
 
     /**
      * Test that updating a user with no new data returns unmodified.
      */
-    public function testUpdateAnUnmodifiedUser()
+    public function testUpdateAnUnmodifiedGroup()
     {
         $this->actingAs($this->user)
-            ->json('PATCH', '/api/user/1', $this->user->toArray())
+            ->json('PATCH', '/api/group/1', $this->group->toArray())
             ->assertResponseStatus(Response::HTTP_NOT_MODIFIED);
     }
 
     /**
      * Test we can delete a user.
      */
-    public function testDestroyAUser()
+    public function testDestroyAGroup()
     {
-        $user = factory(User::class)->create();
+        $group = factory(Group::class)->create();
 
         // Delete the newly created user.
         $this->actingAs($this->user)
-            ->json('DELETE', '/api/user/' . $user->id)
+            ->json('DELETE', '/api/group/' . $group->id)
             ->assertResponseStatus(Response::HTTP_OK);
 
         // Assert the new user is not available.
         $this->actingAs($this->user)
-            ->json('GET', '/api/user/' . $user->id)
+            ->json('GET', '/api/group/' . $group->id)
             ->assertResponseStatus(Response::HTTP_NOT_FOUND);
     }
 
     /**
      * Test we get a not found when deleting a user that doesn't exist.
      */
-    public function testDestroyAUserFailsWhenNotFound()
+    public function testDestroyAGroupFailsWhenNotFound()
     {
         $this->actingAs($this->user)
-            ->json('DELETE', '/api/user/2')
+            ->json('DELETE', '/api/group/2')
             ->assertResponseStatus(Response::HTTP_NOT_FOUND);
     }
 
@@ -222,15 +232,13 @@ class UserControllerTest extends TestCase
      *
      * @return array
      */
-    protected function newUser()
+    protected function newGroup()
     {
-        $newUser = [
-            "name" => "David Barker",
-            "email" => "daveawb@hotmail.com",
-            "password" => "password",
-            "password_confirmation" => "password"
+        $newGroup = [
+            "name" => "users",
+            "level" => 1
         ];
 
-        return $newUser;
+        return $newGroup;
     }
 }

@@ -2,27 +2,24 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Resources\Group;
+
 use App\Http\Requests;
-use App\Resources\User;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 
-/**
- * Class UserController
- * @package App\Http\Controllers\Api
- */
-class UserController extends Controller
+class GroupController extends Controller
 {
     /**
-     * @var User\Repository
+     * @var Group\Repository
      */
     private $repository;
 
     /**
-     * UserController constructor.
-     * @param User\Repository $repository
+     * GroupController constructor.
+     * @param Group\Repository $repository
      */
-    public function __construct(User\Repository $repository)
+    public function __construct(Group\Repository $repository)
     {
         $this->repository = $repository;
     }
@@ -40,10 +37,10 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Requests\User\CreateRequest $request
+     * @param Requests\Group\CreateRequest $request
      * @return Response
      */
-    public function store(Requests\User\CreateRequest $request)
+    public function store(Requests\Group\CreateRequest $request)
     {
         return response()->json($this->repository->create($request->all()), Response::HTTP_CREATED);
     }
@@ -51,37 +48,37 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param User $user
+     * @param Group $group
      * @return Response
      */
-    public function show(User $user)
+    public function show(Group $group)
     {
-        return response()->json($user, Response::HTTP_OK);
+        return response()->json($group, Response::HTTP_OK);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param Requests\User\UpdateRequest $request
-     * @param User $user
+     * @param Requests\Group\UpdateRequest $request
+     * @param Group $group
      * @return Response
      */
-    public function update(Requests\User\UpdateRequest $request, User $user)
+    public function update(Requests\Group\UpdateRequest $request, Group $group)
     {
-        $result = $this->repository->updateModel($request->all(), $user);
+        $result = $this->repository->updateModel($request->all(), $group);
 
-        return response()->json($user, $result ? Response::HTTP_OK : Response::HTTP_NOT_MODIFIED);
+        return response()->json($group, $result ? Response::HTTP_OK : Response::HTTP_NOT_MODIFIED);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param User $user
+     * @param Group $group
      * @return Response
      */
-    public function destroy(User $user)
+    public function destroy(Group $group)
     {
-        $user->delete();
+        $group->delete();
 
         return response("", Response::HTTP_OK);
     }
